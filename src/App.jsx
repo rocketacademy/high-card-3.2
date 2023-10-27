@@ -5,9 +5,23 @@ import { useState } from "react";
 
 function App(props) {
   // Set default value of card deck to new shuffled deck
-  const [cardDeck] = useState(makeShuffledDeck());
+  const [cardDeck, setCardDeck] = useState(makeShuffledDeck());
   // currCards holds the cards from the current round
   const [currCards, setCurrCards] = useState([]);
+
+  const [hasGameStarted, setHasGameStarted] = useState(false);
+  const [roundWinner, setRoundWinner] = useState(null);
+  const [player1RoundsWon, setPlayer1RoundsWon] = useState(0);
+  const [player2RoundsWon, setPlayer2RoundsWon] = useState(0);
+
+  const resetGame = () => {
+    setCurrCards([]);
+    setCardDeck(makeShuffledDeck());
+    setHasGameStarted(false);
+    setRoundWinner(null);
+    setPlayer1RoundsWon(0);
+    setPlayer2RoundsWon(0);
+  };
 
   const dealCards = () => {
     const newCurrCards = [cardDeck.pop(), cardDeck.pop()];
