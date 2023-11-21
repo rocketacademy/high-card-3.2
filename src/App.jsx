@@ -1,27 +1,31 @@
 import logo from "/logo.png";
 import "./App.css";
 import { makeShuffledDeck } from "./utils.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App(props) {
-  // Set default value of card deck to new shuffled deck
+
   const [cardDeck, setCardDeck] = useState(makeShuffledDeck());
-  // currCards holds the cards from the current round
   const [currCards, setCurrCards] = useState([]);
 
   const dealCards = () => {
     const newCurrCards = [cardDeck.pop(), cardDeck.pop()];
     setCurrCards(newCurrCards);
   };
-  // You can write JavaScript here, just don't try and set your state!
 
-  // You can access your current components state here, as indicated below
+  useEffect(() => { checkWinner()
+  },[currCards])
+
   const currCardElems = currCards.map(({ name, suit }) => (
-    // Give each list element a unique key
     <div key={`${name}${suit}`}>
       {name} of {suit}
     </div>
   ));
+
+  const checkWinner = () => {
+    console.log(currCards[0]);
+    console.log(currCards[1]);
+  }
 
   return (
     <>
