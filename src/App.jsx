@@ -14,7 +14,17 @@ function App(props) {
     setCurrCards(newCurrCards);
   };
   // You can write JavaScript here, just don't try and set your state!
-
+  const winnerFunction = (card) =>
+    card.length < 2
+      ? null
+      : card[0].rank > card[1].rank
+      ? "Player 1"
+      : card[0].rank < card[1].rank
+      ? "Player 2"
+      : "Draw";
+  const winner = <p>{winnerFunction(currCards)}</p>;
+  // let counter = 0;
+  // console.log(counter);
   // You can access your current components state here, as indicated below
   const currCardElems = currCards.map(({ name, suit }) => (
     // Give each list element a unique key
@@ -31,6 +41,7 @@ function App(props) {
       <div className="card">
         <h2>React High Card 🚀</h2>
         {currCardElems}
+        {winner}
         <br />
         <button onClick={dealCards}>Deal</button>
       </div>
