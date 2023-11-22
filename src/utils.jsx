@@ -55,7 +55,7 @@ const makeDeck = () => {
       const card = {
         name: cardName,
         suit: currentSuit,
-        rank: cardRank,
+        rank: cardRank
       };
 
       // Add the new card to the deck
