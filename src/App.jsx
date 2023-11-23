@@ -1,14 +1,18 @@
 import logo from "/logo.png";
 import "./App.css";
 import { makeShuffledDeck } from "./utils.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Score from "./Score.jsx"
+import Button from "./Button.jsx"
 
 function App() {
   // Set default value of card deck to new shuffled deck
   const [cardDeck, setCardDeck] = useState(makeShuffledDeck());
   // currCards holds the cards from the current round
   const [currCards, setCurrCards] = useState([]);
+  const [displayedElems, setElems] = useState("")
+  
+
 
   const dealCards = () => {
     const players = ["Player 1", "Player 2"]
@@ -32,7 +36,7 @@ function App() {
 
 
   // You can access your current components state here, as indicated below
-  const currCardElems = currCards.map(({ name, suit, player }) => (
+  let currCardElems = currCards.map(({ name, suit, player }) => (
     // Give each list element a unique key
     <div key={`${name}${suit}`}>
       <p>
@@ -41,6 +45,18 @@ function App() {
     </div>
   ));
 
+  
+  useEffect(()=>{
+    if(cardDeck.length == 52){
+      setElems((displayedElems)=> displayedElems ="")
+    }
+    else if (cardDeck.length < 52){
+      setElems((displayedElems)=> displayedElems = currCardElems)
+    }
+  },[cardDeck,currCards])
+  //need to track currCards as cardDeck only changes when deck is empty. currCards changes every round, so useEffect can run if statement every round to see if reset is needed. 
+
+
   return (
     <>
       <div>
@@ -48,10 +64,10 @@ function App() {
       </div>
       <div className="card">
         <h2>React High Card 🚀</h2>
-        {currCardElems}
+        {displayedElems}
         <br />
-        <button onClick={dealCards}>Deal</button>
-        <Score dealtCards={currCards} cardDeck={cardDeck}/>
+        <Button dealCards={dealCards} cardDeck={cardDeck} setCardDeck={setCardDeck} makeShuffledDeck={makeShuffledDeck}/>
+        <Score dealtCards={currCards} cardDeck={cardDeck} />
       </div>
     </>
   );

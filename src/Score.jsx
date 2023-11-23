@@ -7,6 +7,8 @@ export default function Score(props) {
   const [player2Score, add2Score] = useState(0);
   const [currWinner, setWin] = useState("");
   useEffect(() => {
+    // setWin((currWinner) => (currWinner = winner(dealtCards)));
+    // console.log("currWinner: ", currWinner);
     if (dealtCards[0]?.rank > dealtCards[1]?.rank) {
       add1Score(() => player1Score + 1);
     } else if (dealtCards[0]?.rank < dealtCards[1]?.rank) {
@@ -26,10 +28,17 @@ export default function Score(props) {
         else if(player2Score>player1Score){
           return `Winner: ${(currWinner = dealtCards[1]?.player)}`;
         }
+        else{return `Draw`}
       })
     }
 
   },[cardDeckLength,currWinner,dealtCards,player1Score,player2Score])
+
+  useEffect (()=>{
+    add1Score((player1Score) => player1Score =0)
+    add2Score((player2Score) => player2Score =0)
+    setWin((currWinner)=>currWinner="")
+  },[props.cardDeck])
 
   console.log("dealtCards: ", dealtCards);
   
