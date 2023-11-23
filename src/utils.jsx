@@ -19,6 +19,8 @@ const shuffleCards = (cards) => {
   return cards;
 };
 
+
+
 const makeDeck = () => {
   // Initialise an empty deck array
   const newDeck = [];
