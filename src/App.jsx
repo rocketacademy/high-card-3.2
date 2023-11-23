@@ -14,6 +14,7 @@ function App(props) {
   const [showCardContent, setShowCardContent] = useState(false);
   const [finalWinner, setFinalWinner] = useState(null);
   const [buttonText, setButtonText] = useState("Deal");
+  const [buttonColour, setButtonColour] = useState("#ededed");
 
   const dealCards = () => {
     const newCurrCards = [cardDeck.pop(), cardDeck.pop()];
@@ -23,6 +24,7 @@ function App(props) {
     if (cardDeck.length === 0) {
       determineFinalWinner();
       setButtonText("Play Again");
+      setButtonColour("#ffff99");
     }
   };
 
@@ -76,11 +78,15 @@ function App(props) {
     </div>
   ));
 
+  // Button function
+
   // To change name of button when state changed
   // change function name
   const dealOrRestart = cardDeck.length > 0 ? dealCards : restartGame;
   // change button name
   const buttonLabel = cardDeck.length > 0 ? "Deal" : buttonText;
+  // change button colour too
+  const colourButton = cardDeck.length > 0 ? "#ededed" : buttonColour;
 
   return (
     <>
@@ -102,7 +108,12 @@ function App(props) {
         )}
         <>
           <br />
-          <button onClick={dealOrRestart}>{buttonLabel}</button>
+          <button
+            onClick={dealOrRestart}
+            style={{ backgroundColor: colourButton }}
+          >
+            {buttonLabel}
+          </button>
           <br />
         </>
       </div>
