@@ -80,8 +80,8 @@ function App(props) {
         {currCardElems}
         {gameEnd ? (
           <p>
-            Game Over
-            <br /> Game Winner: {gameWinner}
+            Game Over Game Winner: {gameWinner}
+            <br />
           </p>
         ) : (
           <p>Round Winner: {roundWinner}</p>
