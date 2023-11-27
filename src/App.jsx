@@ -2,6 +2,7 @@ import logo from "/logo.png";
 import "./App.css";
 import { makeShuffledDeck } from "./utils.jsx";
 import { useEffect, useState } from "react";
+import { Button, Card } from "react-bootstrap";
 
 function App(props) {
 
@@ -10,6 +11,7 @@ function App(props) {
   const [currWinner, setCurrWinner] = useState(0); 
   const [player1wins, setPlayer1Wins] = useState(0);
   const [player2wins, setPlayer2Wins] = useState(0);
+  const [gameState, setGameState] = useState(false);
 
   const dealCards = () => {
     const newRoundOfCards = [cardDeck.pop(), cardDeck.pop()];
@@ -22,11 +24,12 @@ function App(props) {
       roundWinner = 2;
       setPlayer2Wins(player2wins + 1)
     } else {
-      roundWinner = null;
+      roundWinner = 0;
     }
 
     setCurrCards(newRoundOfCards);
     setCurrWinner(roundWinner);
+    setGameState(true); 
 
   };
 
@@ -48,30 +51,48 @@ function App(props) {
     return gameWinner
   }
 
+  const resetGame = () => {
+    setCardDeck(makeShuffledDeck);
+    setCurrCards([]);
+    setCurrWinner(0);
+    setPlayer1Wins(0);
+    setPlayer2Wins(0);
+    setGameState(false)
+  }
+
+  let winStatement = currWinner == 0 ? "It's a Draw!" : "Player " + currWinner + " wins!"
+
   return (
     <>
       <div>
         <img src={logo} className="logo" alt="Rocket logo" />
       </div>
-      <div className="card">
-        <h2>React High Card 🚀</h2>
+
+      <h2>React High Card 🚀</h2>
+
+      <div className="card-nb">
         {currCardElems}
         <br />
-        <button onClick={dealCards}>Deal</button>
+        <Button variant="light" onClick={dealCards}>
+          Deal
+        </Button>
       </div>
-      <div>
-        <p>Player {currWinner} wins!</p>
-      </div>
-      <div>
-        <p>Player 1 has {player1wins} wins.</p>
-      </div>
-      <div>
-        <p>Player 2 has {player2wins} wins.</p>
-      </div>
-      <p>
-        {cardDeck.length > 0 ? null : "Card Deck Empty."}
-      </p>
-      {cardDeck.length > 0 ? null : declareWinner()}
+      <br></br>
+
+      <Card>
+        <div className="result">
+          {gameState? winStatement : ""} 
+          <p className="playerResult">Player 1 has {player1wins} wins.</p>
+          <p className="playerResult">Player 2 has {player2wins} wins.</p>
+        </div>
+        <div className="aft-result">
+          <p>{cardDeck.length > 0 ? null : "Card Deck Empty."}</p>
+          <p style={{}}>{cardDeck.length > 0 ? null : declareWinner()}</p>
+          <Button variant="danger" onClick={resetGame}> 
+            Reset Game
+          </Button>
+        </div>
+      </Card>
     </>
   );
 }
