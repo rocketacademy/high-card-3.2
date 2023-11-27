@@ -3,19 +3,17 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 150px;
+  padding: 1em;
   will-change: filter;
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 1em #646cffaa);
 }
 
 @keyframes logo-spin {
@@ -33,10 +31,22 @@
   }
 }
 
-.card {
-  padding: 2em;
+.aft-result {
+  margin-bottom: 10px; ;
 }
 
-.read-the-docs {
-  color: #888;
+.result {
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+}
+.card-nb {
+  padding: 2em;
+  background-color: #3b3b3b;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.playerResult {
+  margin: 0; 
+  padding: 0em; 
 }
