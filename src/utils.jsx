@@ -19,6 +19,23 @@ const shuffleCards = (cards) => {
   return cards;
 };
 
+const suits = ["\u2660", "\u2665", "\u2666", "\u2663"]; // Spades, Hearts, Diamonds, Clubs
+const ranks = [
+  "Two",
+  "Three",
+  "Four",
+  "Five",
+  "Six",
+  "Seven",
+  "Eight",
+  "Nine",
+  "Ten",
+  "Jack",
+  "Queen",
+  "King",
+  "Ace",
+];
+
 const makeDeck = () => {
   // Initialise an empty deck array
   const newDeck = [];
