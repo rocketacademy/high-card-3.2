@@ -66,6 +66,7 @@ const makeDeck = () => {
   // Return the completed card deck
   return newDeck;
 };
+//returns an array of card objects with the keys "name" , "suit"  and "rank".
 
 // Export functionality to create a shuffled 52-card deck
 export const makeShuffledDeck = () => shuffleCards(makeDeck());
