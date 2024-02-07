@@ -24,7 +24,10 @@ function App() {
   };
 
   const dealCards = () => {
-    const newCurrCards = [cardDeck.pop(), cardDeck.pop()];
+    const newCurrCards = [
+      cardDeck[cardDeck.length - 1],
+      cardDeck[cardDeck.length - 2],
+    ];
 
     let newRoundWinner = null;
 
